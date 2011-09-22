@@ -1,5 +1,5 @@
 <% content_for :header_tags do %>
-  <%= stylesheet_link_tag 'redmine_cexc', :plugin => 'redmine_cexc' %>
+  <%= stylesheet_link_tag 'redmine_luceit', :plugin => 'redmine_luceit' %>
   <%= javascript_include_tag :defaults %>
 <% end %>
 
@@ -73,7 +73,7 @@
        <td class="hours"><%= report.expected_hours %></td>
        <td id="notification_status_<%= report.user.id %>" class="acciones">
          <% if report.dedication_percentage < 75 %>
-           <%= link_to_remote image_tag("notification_icon.jpg", :plugin => "redmine_cexc", :size => "24x24", :border => 0, :title=>"Notificar problema con las horas" ),
+           <%= link_to_remote image_tag("notification_icon.jpg", :plugin => "redmine_luceit", :size => "24x24", :border => 0, :title=>"Notificar problema con las horas" ),
              :url => {:action => 'time_email_notification', :user_id => report.user.id, :begin_date => @begin_date, :end_date => @end_date},
              :update => 'notification_status_' + report.user.id.to_s, :condition => report.dedication_percentage<85 %>
          <% end %>
