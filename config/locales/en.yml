@@ -1,0 +1,17 @@
+# English strings go here
+en:
+  my_time_report: My time report
+  project: Project
+  hours: Hours
+  time_report: Time report
+  user: User
+  projects: Projects
+  percentage: Percentage (%)
+  hours_expected: Hours expected
+  hours_recorded: Hours recorded
+  last_week: Last week
+  actual_week: Actual week
+  field_hours_per_week: Hours per week
+  begin_date: Begin date
+  end_date: End date
+  send: Send

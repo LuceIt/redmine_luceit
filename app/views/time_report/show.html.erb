@@ -1,0 +1,69 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'redmine_cexc', :plugin => 'redmine_cexc' %>
+<% end %>
+
+
+<h2>Parte de Horas</h2>
+
+<div class="box">  
+  <% form_tag do %>
+    <label for="begin_date"><%= l(:begin_date)%></label>
+    <input type="text" id="begin_date" name="begin_date" value="<%=@begin_date%>" size="8" maxlength="10" />
+    <%= calendar_for(:begin_date) %>
+
+    <%= submit_tag l(:send) %>
+  <% end %>
+</div>
+
+  <% form_tag do %>
+    <input type="hidden" id="begin_date" name="begin_date" value="<%=@last_week_monday%>" >
+    <input type="hidden" id="end_date" name="end_date" value="<%=@last_week_friday%>" >
+    <%= submit_tag l(:last_week) %>
+  <% end %>
+
+  <% form_tag do %>
+    <input type="hidden" id="begin_date" name="begin_date" value="<%=@monday_of_the_current_week%>" >
+    <input type="hidden" id="end_date" name="end_date" value="<%=@friday_of_the_current_week%>" >
+    <%= submit_tag l(:actual_week) %>
+  <% end %>
+<br/>
+<br/>
+
+<h3>
+  Tiempos del usuario <%= @user.login %>
+  <% if @begin_date and not @end_date %>
+    desde <%=@begin_date%>
+  <% elsif not @begin_date and @end_date %>
+    hasta <%=@end_date%>
+  <% elsif @begin_date and @end_date %>
+    entre <%=@begin_date%> y <%=@end_date %>
+  <% end %>
+</h3>
+
+<p>
+    Has introducido un total de 
+<span style="color: #007700; font-weight: bold; text-decoration: underline">
+<%= @personal_activity_report.total_hours %></span>
+ horas de un total de 
+<span style="color: #770000; font-weight: bold; text-decoration: underline">
+<%= @personal_activity_report.expected_hours %></span>
+<span style="font-weight: bold">[ <%= @personal_activity_report.dedication_percentage %> % ] </span>
+ horas
+</p>
+
+<% if not @personal_activity_report.hours_of_each_project.empty? %>
+  <table id="per_project_time_report" name="per_project_time_report" cellpadding="5" class="timereport">
+  <tr>
+    <th><%=l(:project) %></th>
+    <th><%=l(:hours) %></th>
+  </tr>
+  <% i = 0 %>
+  <% @personal_activity_report.hours_of_each_project.each do |project, hours| %>
+    <% i += 1 %>
+    <tr class="<%=i %2 == 0 ? 'par' : 'impar'%>">
+      <td><%=project%></td>
+      <td><%=hours%></td>
+    </tr>
+  <% end %>
+<% end %>
+</table>

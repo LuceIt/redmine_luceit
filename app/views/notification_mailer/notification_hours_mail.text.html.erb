@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3>Notificación de horas asignadas a proyectos la semana del <%= @personal_report.first_day_of_the_week.strftime("%d/%m/%Y") %> al <%= @personal_report.last_day_of_the_week.strftime("%d/%m/%Y")%> por <%= @personal_report.user.lastname + ', ' + @personal_report.user.firstname %>
+    </h3>
+    <p>Después de hacer el cómputo semanal hemos detectado que las horas no se ajustan al umbral para darlas por válidas.<p>
+    <p>Ahora mismo el cómputo nos dice que has imputado tan solo un <%= @personal_report.dedication_percentage %>% 
+    (<%= @personal_report.total_hours %> horas asignadas respecto a <%= @personal_report.expected_hours %>)</p>
+    <p>Por favor revísalas y corrige este problema.</p>
+    <p>Gracias.</p>
+  </body>
+</html>

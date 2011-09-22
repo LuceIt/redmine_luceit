@@ -1,0 +1,57 @@
+table.timereport {
+  border: 1px solid #c4c4c4;
+  border-spacing: 0px;
+  width: 100%;
+}
+
+
+table.timereport tr {
+  padding: 4px 15px;
+}
+
+table.timereport th {
+  padding: 4px 15px;
+  border-bottom: 1px solid #c4c4c4;
+  color: #fbfbfb;
+  background-color: #507AAA;
+  font-size: 1.1em;
+}
+
+table.timereport td {
+  padding: 4px 15px;
+}
+
+table.timereport tr.even{
+  background-color: #f6f6f6;
+}
+
+table.timereport tr.odd{
+  background-color: #ffffff;
+}
+
+table#activity_table td {
+  padding: 5px 15px;
+  vertical-align: center;
+  border-bottom-width: 1px;
+}
+
+table#activity_table .user {
+  font-size: 1.3em;
+  text-align: left;
+}
+
+table#activity_table .hours {
+  font-size: 1.3em;
+  text-align: center;
+}
+
+table#activity_table .percentage {
+  font-size: 1.3em;
+  text-align: center;
+  font-weight: bold;
+}
+
+table#activity_table .actions {
+  font-size: 1.3em;
+  text-align: center;
+}

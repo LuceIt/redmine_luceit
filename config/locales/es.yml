@@ -1,0 +1,18 @@
+# Spanish strings go here
+es:
+  my_time_report: Mi informe de tiempos
+  project: Proyecto
+  hours: Horas
+  time_report: Informe de ocupación
+  user: Usuario
+  projects: Proyectos
+  percentage: Porcentaje (%)
+  hours_expected: Horas esperadas
+  hours_recorded: Horas grabadas
+  actions: Acciones
+  last_week: Ultima semana
+  actual_week: Semana actual
+  field_hours_per_week: Horas por semana
+  begin_date: Fecha inicio
+  end_date: Fecha fin
+  send: Enviar

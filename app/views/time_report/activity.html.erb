@@ -1,0 +1,83 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'redmine_cexc', :plugin => 'redmine_cexc' %>
+  <%= javascript_include_tag :defaults %>
+<% end %>
+
+
+<h2><%= l(:time_report)%></h2>
+
+<div class="box">  
+  <% form_tag do %>
+    <label for="begin_date"><%= l('begin_date') %></label>
+    <input type="text" id="begin_date" name="begin_date" value="<%=@begin_date%>" size="8" maxlength="10" />
+    <%= calendar_for(:begin_date) %>
+    <br/>
+    <label for="end_date"><%= l('end_date') %> &nbsp;&nbsp;&nbsp</label>
+    <input type="text" id="end_date" name="end_date" value="<%=@end_date%>" size="8" maxlength="10" />
+    <%= calendar_for(:end_date) %>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%= submit_tag l('send') %>
+  <% end %>
+
+  <br/><br/>
+
+  <% form_tag do %>
+    <input type="hidden" id="begin_date" name="begin_date" value="<%=@last_week_monday%>" />
+    <input type="hidden" id="end_date" name="end_date" value="<%=@last_week_friday%>" />
+    <%= submit_tag l(:last_week) %>
+  <% end %>
+
+  <% form_tag do %>
+    <input type="hidden" id="begin_date" name="begin_date" value="<%=@monday_of_the_current_week%>" />
+    <input type="hidden" id="end_date" name="end_date" value="<%=@friday_of_the_current_week%>" />
+    <%= submit_tag l(:actual_week) %>
+  <% end %>
+
+
+</div>
+
+<br/>
+<br/>
+
+
+<table id="activity_table" name="activity_table" cellpadding="5" class="timereport">
+  <tr>
+    <th><%=l(:user) %></th>
+    <th><%=l(:percentage) %></th>
+    <th><%=l(:hours_recorded) %></th>
+    <th><%=l(:hours_expected) %></th>
+    <th><%=l(:actions) %></th>
+  </tr>
+  <% i = 0 %>
+  <% @activity_report.personal_reports.values.sort.each do |report| %>
+    <% i += 1 %>
+    <tr class="<%=i % 2 == 0 ? 'even' : 'odd'%>">
+      <td class="user"><%= report.user %></td>
+      <td class="percentage">
+        <% def percentage_color(percentage)
+        if percentage < 75
+          return 'red'
+        elsif percentage >= 75 and percentage < 85
+          return 'orange'
+        else
+          return 'green'
+        end
+  end
+%>
+<span style="color:<%=percentage_color(report.dedication_percentage)%>">
+  <%= report.dedication_percentage %>
+</span> %
+       </td>
+       <td class="hours"><%= report.total_hours %></td>
+       <td class="hours"><%= report.expected_hours %></td>
+       <td id="notification_status_<%= report.user.id %>" class="acciones">
+         <% if report.dedication_percentage < 75 %>
+           <%= link_to_remote image_tag("notification_icon.jpg", :plugin => "redmine_cexc", :size => "24x24", :border => 0, :title=>"Notificar problema con las horas" ),
+             :url => {:action => 'time_email_notification', :user_id => report.user.id, :begin_date => @begin_date, :end_date => @end_date},
+             :update => 'notification_status_' + report.user.id.to_s, :condition => report.dedication_percentage<85 %>
+         <% end %>
+         </td>
+       </tr>
+     <% end %>
+   </table> 
